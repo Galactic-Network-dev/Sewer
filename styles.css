@@ -1,0 +1,37 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.shiningButton {
+    position: relative;
+    padding: 15px 30px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 0 10px #ff00ff; /* Neon outline */
+    transition: box-shadow 0.3s ease;
+}
+
+.shiningButton:hover {
+    box-shadow: 0 0 20px #ff00ff; /* Neon outline on hover */
+}
+
+.shine-animation {
+    animation: shine 2s ease-in-out infinite alternate;
+}
+
+@keyframes shine {
+    0% {
+        box-shadow: 0 0 20px rgba(255, 0, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 20px #ff00ff;
+    }
+}
