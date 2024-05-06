@@ -14,32 +14,38 @@
     <div class="container">
         <h1>Proxy Page</h1>
         <div class="search-container">
-            <input type="text" id="searchInput" class="search-bar" placeholder="Enter search term...">
-            <button id="searchButton" class="search-button">Search</button>
+            <input type="text" id="searchInput" class="search-bar" placeholder="Enter URL to proxy...">
+            <button id="searchButton" class="search-button">Proxy</button>
         </div>
-        <div id="searchResults">
-            <!-- Search results will be displayed here -->
+        <div id="proxyContent">
+            <!-- Proxy content will be displayed here -->
         </div>
     </div>
 
     <script>
         const searchInput = document.getElementById('searchInput');
         const searchButton = document.getElementById('searchButton');
-        const searchResults = document.getElementById('searchResults');
+        const proxyContent = document.getElementById('proxyContent');
 
         searchButton.addEventListener('click', async () => {
-            const searchTerm = searchInput.value.trim();
-            if (searchTerm !== '') {
+            const url = searchInput.value.trim();
+            if (url !== '') {
                 try {
-                    const response = await fetch(`https://edgedcircles.com/${encodeURIComponent(searchTerm)}`);
+                    const response = await fetch(`https://edgedcircles.com/${encodeURIComponent(url)}`, {
+                        mode: 'cors',
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'text/html'
+                        }
+                    });
                     const html = await response.text();
-                    searchResults.innerHTML = html;
+                    proxyContent.innerHTML = html;
                 } catch (error) {
-                    console.error('Error fetching search results:', error);
-                    searchResults.innerHTML = '<p>Error fetching search results. Please try again later.</p>';
+                    console.error('Error fetching data:', error);
+                    proxyContent.innerHTML = '<p>Error fetching data. Please try again later.</p>';
                 }
             } else {
-                searchResults.innerHTML = '<p>Please enter a search term.</p>';
+                proxyContent.innerHTML = '<p>Please enter a URL to proxy.</p>';
             }
         });
     </script>
